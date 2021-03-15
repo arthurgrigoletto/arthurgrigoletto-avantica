@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:5.0.6-alpine
+    container_name: avantica-redis
+    tty: true
+    ports:
+      - '6379:6379'
+  postgres:
+    image: postgres
+    container_name: avantica-pg
+    tty: true
+    volumes:
+      - .pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=avantica
+    ports:
+      - '5432:5432'
